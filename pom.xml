@@ -5,11 +5,15 @@
          http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.wangpai.genericcreator</groupId>
-    <artifactId>genericcreator</artifactId>
+    <groupId>org.wangpai.create-generic-object</groupId>
+    <artifactId>create-generic-object-parent</artifactId>
+    <version>1.0</version>
     <packaging>pom</packaging>
-    <version>0.0</version>
 
+    <modules>
+        <module>create-generic-object-model</module>
+        <module>create-generic-object-test</module>
+    </modules>
 
     <properties>
         <!-- 不加此项，JavaFX 打包出来中文会乱码 -->
@@ -18,7 +22,7 @@
         <maven.compiler.target>17</maven.compiler.target>
 
         <!-- 凡是自定义的属性，都要加 .custom 后缀，以防与已有的预置属性相冲突 -->
-        <project.version.custom>0.0</project.version.custom>
+        <project.version.custom>1.0</project.version.custom>
 
         <junit.version.custom>5.9.0</junit.version.custom>
         <lombok.version.custom>1.18.24</lombok.version.custom>
@@ -26,22 +30,29 @@
         <mainclass.custom>XX.xx</mainclass.custom>
     </properties>
 
-    <dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.wangpai.create-generic-object</groupId>
+                <artifactId>create-generic-object-model</artifactId>
+                <version>${project.version.custom}</version>
+            </dependency>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version.custom}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit.version.custom}</version>
-            <scope>test</scope>
-        </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version.custom}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${junit.version.custom}</version>
+                <scope>test</scope>
+            </dependency>
 
-    </dependencies>
+        </dependencies>
+    </dependencyManagement>
 
     <build>
         <plugins>
